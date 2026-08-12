@@ -41,7 +41,14 @@
             </div> --}}
         </div>
         <div class="card-body">
-            <a href="{{ route('purchases.create') }}" class="btn btn-primary mb-3">Create Purchase</a>
+            @if ($purchases->isEmpty())
+                @include('admin.partials.empty-state', [
+                    'title' => 'No purchases found',
+                    'text' => 'Create a purchase to bring stock into the warehouse.',
+                    'action' => route('purchases.create'),
+                    'actionLabel' => 'Create purchase',
+                ])
+            @else
             <table class="table table-bordered" style="width: max-content">
                 <thead>
                     <tr>
@@ -96,10 +103,13 @@
                 </tbody>
                 <tbody id="content" class="searchdata"></tbody>
             </table>
+            @endif
         </div>
     </div>
     <div>
-        {{ $purchases->links('pagination::bootstrap-5') }}
+        @if (!$purchases->isEmpty())
+            {{ $purchases->links('pagination::bootstrap-5') }}
+        @endif
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

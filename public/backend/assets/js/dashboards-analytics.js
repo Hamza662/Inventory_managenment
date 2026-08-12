@@ -12,6 +12,49 @@
   axisColor = config.colors.axisColor;
   borderColor = config.colors.borderColor;
 
+  window.Apex = Object.assign({}, window.Apex, {
+    chart: {
+      animations: {
+        enabled: true,
+        easing: 'easeinout',
+        speed: 1100,
+        animateGradually: {
+          enabled: true,
+          delay: 120
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 450
+        }
+      }
+    }
+  });
+
+  function markChartReady(el) {
+    const shell = el && el.closest('.chart-shell');
+    if (shell) {
+      shell.classList.add('is-ready');
+    }
+  }
+
+  function mountChart(el, options, delay) {
+    if (!el) {
+      return;
+    }
+
+    const chart = new ApexCharts(el, options);
+    setTimeout(function () {
+      const rendered = chart.render();
+      if (rendered && typeof rendered.then === 'function') {
+        rendered.then(function () {
+          markChartReady(el);
+        });
+      } else {
+        markChartReady(el);
+      }
+    }, delay);
+  }
+
   // Total Revenue Report Chart - Bar Chart
   // --------------------------------------------------------------------
   const totalRevenueChartEl = document.querySelector('#totalRevenueChart'),
@@ -269,10 +312,7 @@
         }
       }
     };
-  if (typeof totalRevenueChartEl !== undefined && totalRevenueChartEl !== null) {
-    const totalRevenueChart = new ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
-    totalRevenueChart.render();
-  }
+  mountChart(totalRevenueChartEl, totalRevenueChartOptions, 180);
 
   // Growth Chart - Radial Bar Chart
   // --------------------------------------------------------------------
@@ -350,10 +390,7 @@
         }
       }
     };
-  if (typeof growthChartEl !== undefined && growthChartEl !== null) {
-    const growthChart = new ApexCharts(growthChartEl, growthChartOptions);
-    growthChart.render();
-  }
+  mountChart(growthChartEl, growthChartOptions, 320);
 
   // Profit Report Line Chart
   // --------------------------------------------------------------------
@@ -413,10 +450,7 @@
         show: false
       }
     };
-  if (typeof profileReportChartEl !== undefined && profileReportChartEl !== null) {
-    const profileReportChart = new ApexCharts(profileReportChartEl, profileReportChartConfig);
-    profileReportChart.render();
-  }
+  mountChart(profileReportChartEl, profileReportChartConfig, 420);
 
   // Order Statistics Chart
   // --------------------------------------------------------------------
@@ -483,10 +517,7 @@
         }
       }
     };
-  if (typeof chartOrderStatistics !== undefined && chartOrderStatistics !== null) {
-    const statisticsChart = new ApexCharts(chartOrderStatistics, orderChartConfig);
-    statisticsChart.render();
-  }
+  mountChart(chartOrderStatistics, orderChartConfig, 520);
 
   // Income Chart - Area chart
   // --------------------------------------------------------------------
@@ -582,10 +613,7 @@
         tickAmount: 4
       }
     };
-  if (typeof incomeChartEl !== undefined && incomeChartEl !== null) {
-    const incomeChart = new ApexCharts(incomeChartEl, incomeChartConfig);
-    incomeChart.render();
-  }
+  mountChart(incomeChartEl, incomeChartConfig, 640);
 
   // Expenses Mini Chart - Radial Chart
   // --------------------------------------------------------------------
@@ -655,8 +683,5 @@
         }
       }
     };
-  if (typeof weeklyExpensesEl !== undefined && weeklyExpensesEl !== null) {
-    const weeklyExpenses = new ApexCharts(weeklyExpensesEl, weeklyExpensesConfig);
-    weeklyExpenses.render();
-  }
+  mountChart(weeklyExpensesEl, weeklyExpensesConfig, 760);
 })();

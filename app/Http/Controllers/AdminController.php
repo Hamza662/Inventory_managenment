@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Supplier;
+use App\Models\customer;
+use App\Models\Invoice;
+use App\Models\Buy;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +16,16 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public function AdminDashboard(){
-        return view('admin.index');
+        $stats = [
+            'products' => Product::count(),
+            'suppliers' => Supplier::count(),
+            'customers' => customer::count(),
+            'invoices' => Invoice::count(),
+            'purchases' => Buy::count(),
+            'categories' => Category::count(),
+        ];
+
+        return view('admin.index', compact('stats'));
     }
 
     public function AdminProfile(){

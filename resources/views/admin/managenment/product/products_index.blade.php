@@ -16,6 +16,14 @@
                 </div>
             </div>
         </div>
+        @if ($products->isEmpty())
+            @include('admin.partials.empty-state', [
+                'title' => 'No products found',
+                'text' => 'Add products to start purchases, invoices and stock tracking.',
+                'action' => route('products.create'),
+                'actionLabel' => 'Create product',
+            ])
+        @else
         <div class="table-responsive text-nowrap">
             <table class="table" style="text-align:center">
                 <thead class="table-light">
@@ -60,9 +68,12 @@
                 <tbody id="content" class="searchdata"></tbody>
             </table>
         </div>
+        @endif
     </div>
     <div>
-        {{ $products->links('pagination::bootstrap-5') }}
+        @if (!$products->isEmpty())
+            {{ $products->links('pagination::bootstrap-5') }}
+        @endif
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

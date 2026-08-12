@@ -15,6 +15,14 @@
                 </div>
             </div>
         </div>
+        @if ($categories->isEmpty())
+            @include('admin.partials.empty-state', [
+                'title' => 'No categories found',
+                'text' => 'Create a category to organize products by supplier.',
+                'action' => route('categories.create'),
+                'actionLabel' => 'Create category',
+            ])
+        @else
         <div class="table-responsive text-nowrap">
             <table class="table" style="text-align:center">
                 <thead class="table-light">
@@ -53,9 +61,12 @@
                 <tbody id="content" class="searchdata"></tbody>
             </table>
         </div>
+        @endif
     </div>
     <div>
-        {{ $categories->links('pagination::bootstrap-5') }}
+        @if (!$categories->isEmpty())
+            {{ $categories->links('pagination::bootstrap-5') }}
+        @endif
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -14,7 +14,7 @@
 <!-- beautify ignore:start -->
 <html
   lang="en"
-  class="light-style layout-menu-fixed"
+  class="light-style layout-menu-fixed premium-ui"
   dir="ltr"
   data-theme="theme-default"
   data-assets-path="../assets/"
@@ -29,18 +29,19 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Inventory · Admin Portal</title>
 
     <meta name="description" content="" />
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('backend/assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}" />
+    <link rel="alternate icon" type="image/png" href="{{ asset('favicon.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -56,6 +57,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('backend/assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('backend/assets/css/demo.css') }}" />
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/premium.css') }}" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('backend/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
@@ -141,9 +143,8 @@
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
-            <!-- Content -->
-
-           @yield('content')
+            @include('admin.partials.module-tabs')
+            @yield('content')
             <!-- / Content -->
 
             <!-- Footer -->
@@ -180,10 +181,18 @@
     <script src="{{ asset('backend/assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
-    <script src="{{ asset('backend/assets/js/dashboards-analytics.js') }}"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    @if (request()->routeIs('admin.index'))
+    <script src="{{ asset('backend/assets/js/dashboards-analytics.js') }}" defer></script>
+    <script>
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          document.querySelectorAll('.chart-shell:not(.is-ready)').forEach(function (shell) {
+            shell.classList.add('is-ready');
+          });
+        }, 4000);
+      });
+    </script>
+    @endif
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

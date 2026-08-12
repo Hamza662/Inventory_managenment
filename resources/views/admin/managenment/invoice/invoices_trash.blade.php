@@ -2,10 +2,17 @@
 
 @section('content')
     <div class="container mt-4">
-        <h5 class="card-header d-flex justify-content-between align-items-center">
-            All Trashed
-            <a href="{{ route('invoices.index') }}" class="btn btn-primary btn-sm">Back To view</a>
-        </h5>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Trashed invoices</h5>
+            </div>
+            <div class="card-body">
+                @if ($invoices->isEmpty())
+                    @include('admin.partials.empty-state', [
+                        'title' => 'Trash is empty',
+                        'text' => 'Deleted invoices will appear here.',
+                    ])
+                @else
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -49,8 +56,8 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- <div>
-            {{ $invoices->links('pagination::bootstrap-5') }}
-        </div> --}}
+                @endif
+            </div>
+        </div>
     </div>
 @endsection

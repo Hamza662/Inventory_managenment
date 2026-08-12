@@ -1,9 +1,19 @@
 @extends('admin.admin_dashboard')
 @section('content')
-    <div class="container mt-5">
-        <h1 class="mb-4">Stock Report</h1>
-
-        {{-- <p class="mb-4">Today is Thursday, August 8, 2024 and here are the results:</p> --}}
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Stock Report</h5>
+            </div>
+            <div class="card-body">
+        @if ($products->isEmpty())
+            @include('admin.partials.empty-state', [
+                'title' => 'No stock data found',
+                'text' => 'Add products and purchases first to see remaining stock here.',
+                'action' => route('products.create'),
+                'actionLabel' => 'Create product',
+            ])
+        @else
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
@@ -47,6 +57,9 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        @endif
+            </div>
         </div>
     </div>
 @endsection

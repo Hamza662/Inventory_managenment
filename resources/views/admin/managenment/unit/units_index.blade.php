@@ -8,6 +8,14 @@
             {{-- <a href="{{ route('units.create') }}" class="btn btn-primary btn-sm">Create</a> --}}
         </h5>
         <div class="table-responsive text-nowrap">
+            @if ($units->isEmpty())
+                @include('admin.partials.empty-state', [
+                    'title' => 'No units found',
+                    'text' => 'Create units like kg, box or piece before adding products.',
+                    'action' => route('units.create'),
+                    'actionLabel' => 'Create unit',
+                ])
+            @else
             <table class="table" style="text-align:center">
                 <thead class="table-light">
                     <tr>
@@ -39,6 +47,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
 @endsection

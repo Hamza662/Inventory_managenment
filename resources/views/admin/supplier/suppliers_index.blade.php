@@ -16,6 +16,14 @@
             </div> --}}
         </div>
         
+        @if ($suppliers->isEmpty())
+            @include('admin.partials.empty-state', [
+                'title' => 'No suppliers found',
+                'text' => 'Add your first supplier to start managing purchases and stock.',
+                'action' => route('suppliers.create'),
+                'actionLabel' => 'Create supplier',
+            ])
+        @else
         <div class="table-responsive text-nowrap">
             <table class="table" style="text-align:center">
                 <thead class="table-light">
@@ -56,9 +64,12 @@
                 <tbody id="content" class="searchdata"></tbody>
             </table>
         </div>
+        @endif
     </div>
     <div>
-        {{$suppliers->links('pagination::bootstrap-5')}}
+        @if (!$suppliers->isEmpty())
+            {{$suppliers->links('pagination::bootstrap-5')}}
+        @endif
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{-- <script>

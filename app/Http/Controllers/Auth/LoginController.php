@@ -29,6 +29,11 @@ class LoginController extends Controller
         $this->middleware('auth')->only('logout');
     }
 
+    public function username()
+    {
+        return 'login';
+    }
+
     protected function authenticated(Request $request, $user)
     {
         if ($user->role === 'admin') {
@@ -38,20 +43,32 @@ class LoginController extends Controller
         } else {
             return redirect()->intended('/dashboard');
         }
-    } 
+    }
 
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
+        $request->validate([
+            'login' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        if (auth()->attempt($request->only('email', 'password'))) {
+        $login = $request->input('login');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_name';
+
+        if (auth()->attempt([
+            $field => $login,
+            'password' => $request->password,
+        ], $request->boolean('remember'))) {
+            $request->session()->regenerate();
+
             return $this->authenticated($request, auth()->user());
         }
 
-        return $this->sendFailedLoginResponse($request);
+        return back()
+            ->withInput($request->only('login', 'remember'))
+            ->withErrors([
+                'login' => 'These credentials do not match our records.',
+            ]);
     }
 
     public function logout(Request $request)
@@ -59,6 +76,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect()->route('login');
     }
 }

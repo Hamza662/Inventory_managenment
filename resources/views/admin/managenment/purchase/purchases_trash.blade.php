@@ -11,7 +11,12 @@
     <div class="card m-4">
         <h5 class="card-header">Purchase List</h5>
         <div class="card-body">
-            {{-- <a href="{{ route('purchases.create') }}" class="btn btn-primary mb-3">Create Purchase</a> --}}
+            @if ($purchases->isEmpty())
+                @include('admin.partials.empty-state', [
+                    'title' => 'Trash is empty',
+                    'text' => 'Deleted purchases will appear here.',
+                ])
+            @else
             <table class="table table-bordered">
                 {{-- <pre>{{ print_r($purchases->toArray(), true) }}</pre> --}}
 
@@ -63,6 +68,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
 @endsection

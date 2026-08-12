@@ -11,6 +11,12 @@
     <div class="card m-4">
         <h5 class="card-header">Purchase List</h5>
         <div class="card-body">
+            @if ($purchases->isEmpty())
+                @include('admin.partials.empty-state', [
+                    'title' => 'No pending purchases',
+                    'text' => 'Approved and pending purchases will show here when available.',
+                ])
+            @else
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -45,6 +51,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
     <script>

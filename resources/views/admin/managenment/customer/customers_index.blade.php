@@ -18,6 +18,14 @@
         </div>
         <div class="table-responsive text-nowrap">
             <div class="table-responsive">
+                @if ($customers->isEmpty())
+                    @include('admin.partials.empty-state', [
+                        'title' => 'No customers found',
+                        'text' => 'Create a customer to start invoices and credit tracking.',
+                        'action' => route('customers.create'),
+                        'actionLabel' => 'Create customer',
+                    ])
+                @else
                 <table class="table" style="text-align:center">
                     <thead class="table-light">
                         <tr>
@@ -61,15 +69,18 @@
 
                                 </td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                    <tbody id="content" class="searchdata"></tbody>
+                    @endforeach
+                </tbody>
+                <tbody id="content" class="searchdata"></tbody>
                 </table>
+                @endif
             </div>
         </div>
     </div>
     <div>
-        {{$customers->links('pagination::bootstrap-5')}}
+        @if (!$customers->isEmpty())
+            {{$customers->links('pagination::bootstrap-5')}}
+        @endif
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

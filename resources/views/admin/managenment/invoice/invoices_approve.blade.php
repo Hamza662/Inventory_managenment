@@ -2,7 +2,17 @@
 
 @section('content')
     <div class="container mt-4">
-        <h2>Invoices</h2>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Approve invoices</h5>
+            </div>
+            <div class="card-body">
+                @if ($invoices->isEmpty())
+                    @include('admin.partials.empty-state', [
+                        'title' => 'No pending invoices',
+                        'text' => 'Invoices waiting for approval will show here.',
+                    ])
+                @else
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -42,7 +52,9 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- {{ $invoices->links('pagination::bootstrap-5') }} --}}
+                @endif
+            </div>
+        </div>
     </div>
     {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -91,6 +103,8 @@
         });
     </script> --}}
      <div>
-        {{$invoices->links('pagination::bootstrap-5')}}
+        @if (!$invoices->isEmpty())
+            {{$invoices->links('pagination::bootstrap-5')}}
+        @endif
     </div>
 @endsection

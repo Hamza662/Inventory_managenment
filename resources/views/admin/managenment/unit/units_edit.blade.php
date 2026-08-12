@@ -7,17 +7,17 @@
                 <h5 class="mb-0">Edit Unit</h5>
                 <small class="text-muted float-end">Update Unit</small>
             </div>
-            <div class="card-body">
+            <div class="card-body p-4">
                 <form action="{{ route('units.update', $unit->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label class="form-label" for="basic-icon-default-fullname">Name</label>
-                        <div class="input-group input-group-merge">
+                        <div class="input-group">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                    class="bx bx-user"></i></span>
+                                    class="bx bx-ruler"></i></span>
                             <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe"
+                                id="basic-icon-default-fullname" placeholder="KG" aria-label="Unit name"
                                 aria-describedby="basic-icon-default-fullname2" name="name" value="{{ old('name', $unit->name) }}">
                         </div>
                         @error('name')

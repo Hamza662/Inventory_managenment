@@ -2,11 +2,16 @@
 
 @section('content')
     <div class="card m-4">
-        <h5 class="card-header d-flex justify-content-between align-items-center">
-            All Trashed supplier
-            <a href="{{ route('suppliers.index') }}" class="btn btn-primary btn-sm">Back To view</a>
+        <h5 class="card-header">
+            Trashed suppliers
         </h5>
         <div class="table-responsive text-nowrap">
+            @if ($suppliers->isEmpty())
+                @include('admin.partials.empty-state', [
+                    'title' => 'Trash is empty',
+                    'text' => 'Deleted suppliers will appear here so you can restore or remove them forever.',
+                ])
+            @else
             <table class="table">
                 <thead class="table-light">
                     <tr>
@@ -50,6 +55,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
 @endsection

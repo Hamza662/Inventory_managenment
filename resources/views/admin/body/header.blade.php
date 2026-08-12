@@ -6,44 +6,30 @@
         </a>
     </div>
 
-    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-        <!-- Search -->
-        <div class="navbar-nav align-items-center">
-            <div class="nav-item d-flex align-items-center">
-                <!-- Search Icon -->
-                {{-- <i class="bx bx-search fs-4 lh-0 me-2"></i> --}}
-
-                <!-- Search Form -->
-                <form action="{{ route('redirectSearch') }}" method="GET" class="d-flex align-items-center">
-                    <input type="text" name="query" placeholder="Global Search"
-                        class="form-control" style="border: none; box-shadow: none; outline: none; width: 200px;">
-                    <button type="submit" class="btn btn-primary ms-2" style="color: #696cff; background-color:white" name="btn">Search</button>
-                </form>
-            </div>
-            
-        </div>
-
-        <!-- /Search -->
+    <div class="navbar-nav-right d-flex align-items-center w-100" id="navbar-collapse">
+        <form action="{{ route('redirectSearch') }}" method="GET" class="xf-search">
+            <i class="bx bx-search"></i>
+            <input type="text" name="query" placeholder="Search products, invoices, customers..." value="{{ request('query') }}">
+            <button type="submit" name="btn">Search</button>
+        </form>
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <!-- Place this tag where you want the button to render. -->
-            <li class="nav-item lh-1 me-3">
-                <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free"
-                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-            </li>
-
-            <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                        <img src="{{ auth()->user()->photo ? asset('image/admin_images/' . auth()->user()->photo) : asset('image/blank_image.jpg') }}"
-                            alt class="w-px-40 h-auto rounded-circle" />
+                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <div class="user-chip">
+                        <div class="avatar avatar-online">
+                            <img src="{{ auth()->user()->photo ? asset('image/admin_images/' . auth()->user()->photo) : asset('image/blank_image.jpg') }}"
+                                alt="User" class="w-px-40 h-auto rounded-circle" />
+                        </div>
+                        <div class="meta">
+                            <strong>{{ Auth::user()->name }}</strong>
+                            <small>{{ Auth::user()->role }}</small>
+                        </div>
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ route('admin.profile') }}">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
@@ -51,7 +37,6 @@
                                              alt="User Avatar"
                                              class="w-px-40 h-auto rounded-circle" />
                                     </div>
-                                    
                                 </div>
                                 <div class="flex-grow-1">
                                     <span class="fw-semibold d-block">{{ Auth::user()->name }}</span>
@@ -71,29 +56,25 @@
                     </li>
                     <li>
                         <a class="dropdown-item" href="{{ route('admin.change.password') }}">
-                            <i class="fa-solid fa-key me-1"></i>
-                            <span class="align-middle">change Password</span>
+                            <i class="bx bx-key me-2"></i>
+                            <span class="align-middle">Change Password</span>
                         </a>
                     </li>
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <form id="logout-form" action="{{ route('user.logout') }}" method="POST"
-                            style="display: none;">
+                        <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-
                         <a class="dropdown-item" href="#"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Log Out</span>
                         </a>
                     </li>
-
                 </ul>
             </li>
-            <!--/ User -->
         </ul>
     </div>
 </nav>

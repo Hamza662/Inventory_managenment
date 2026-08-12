@@ -2,8 +2,20 @@
 
 @section('content')
     <div class="container mt-4">
-        <h2>Invoices</h2>
-        <table class="table table-striped">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">All invoices</h5>
+            </div>
+            <div class="card-body">
+                @if ($invoices->isEmpty())
+                    @include('admin.partials.empty-state', [
+                        'title' => 'No invoices found',
+                        'text' => 'Create an invoice to record sales and update stock.',
+                        'action' => route('invoices.create'),
+                        'actionLabel' => 'Create invoice',
+                    ])
+                @else
+                <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Invoice No</th>
@@ -57,8 +69,13 @@
                 @endforeach
             </tbody>
         </table>
+                @endif
         <div>
-            {{ $invoices->links('pagination::bootstrap-5') }}
+            @if (!$invoices->isEmpty())
+                {{ $invoices->links('pagination::bootstrap-5') }}
+            @endif
+        </div>
+            </div>
         </div>
     </div>
     <script>

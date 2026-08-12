@@ -10,6 +10,12 @@
                 <h5>Invoices</h5>
             </div>
             <div class="card-body">
+                @if ($invoices->isEmpty())
+                    @include('admin.partials.empty-state', [
+                        'title' => 'No credit customers found',
+                        'text' => 'Partial paid invoices will appear here for follow-up.',
+                    ])
+                @else
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -64,10 +70,13 @@
                         @endforeach
                     </tbody>
                 </table>
+                @endif
             </div>
         </div>
     </div>
     <div>
-        {{$invoices->links('pagination::bootstrap-5')}}
+        @if (!$invoices->isEmpty())
+            {{$invoices->links('pagination::bootstrap-5')}}
+        @endif
     </div>
 @endsection

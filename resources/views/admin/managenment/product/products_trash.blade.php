@@ -2,12 +2,16 @@
 
 @section('content')
     <div class="card m-4">
-        <h5 class="card-header d-flex justify-content-between align-items-center">
-            Product Trashed
-            {{-- <a href="{{ route('suppliers.trash') }}" class="btn btn-danger btn-sm">GoTo Trash</a> --}}
-            <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm">Back to view</a>
+        <h5 class="card-header">
+            Trashed products
         </h5>
         <div class="table-responsive text-nowrap">
+            @if ($products->isEmpty())
+                @include('admin.partials.empty-state', [
+                    'title' => 'Trash is empty',
+                    'text' => 'Deleted products will appear here.',
+                ])
+            @else
             <table class="table" style="text-align:center">
                 <thead class="table-light">
                     <tr>
@@ -47,6 +51,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
 @endsection
