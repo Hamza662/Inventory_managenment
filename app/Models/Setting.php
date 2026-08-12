@@ -21,6 +21,7 @@ class Setting extends Model
                 'currency_code' => 'PKR',
                 'currency_symbol' => 'Rs',
                 'footer_text' => 'Built for faster stock control.',
+                'demo_data_visible' => true,
             ]);
         });
     }

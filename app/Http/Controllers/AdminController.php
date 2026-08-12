@@ -25,7 +25,10 @@ class AdminController extends Controller
             'categories' => Category::count(),
         ];
 
-        return view('admin.index', compact('stats'));
+        $demoExists = demo_data_exists();
+        $demoVisible = demo_data_visible();
+
+        return view('admin.index', compact('stats', 'demoExists', 'demoVisible'));
     }
 
     public function AdminProfile(){

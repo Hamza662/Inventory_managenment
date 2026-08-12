@@ -6,15 +6,16 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\BuyProduct;
+use App\Models\Concerns\HidesDemoData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Buy extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory, SoftDeletes, HidesDemoData;
 
-    protected $fillable = ['purchase_no', 'date', 'supplier_id', 'category_id'];
+    protected $fillable = ['purchase_no', 'date', 'supplier_id', 'category_id', 'sttaus', 'description', 'is_demo'];
 
 
     /**

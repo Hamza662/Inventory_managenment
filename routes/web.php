@@ -16,6 +16,7 @@ use App\Http\Controllers\managenment\CustomerController;
 use App\Http\Controllers\managenment\PurchaseController;
 use App\Http\Controllers\managenment\CreditCustomerController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\DemoDataController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserManagementController;
 
@@ -38,6 +39,8 @@ Route::get('/', function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.index');
+    Route::post('/admin/demo-data/import', [DemoDataController::class, 'import'])->name('demo.import');
+    Route::post('/admin/demo-data/clear', [DemoDataController::class, 'clear'])->name('demo.clear');
 
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
 

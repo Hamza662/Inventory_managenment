@@ -38,3 +38,44 @@ if (! function_exists('currencies_list')) {
         return Currencies::all();
     }
 }
+
+if (! function_exists('demo_data_visible')) {
+    function demo_data_visible(): bool
+    {
+        try {
+            return (bool) (Setting::current()->demo_data_visible ?? true);
+        } catch (\Throwable $e) {
+            return true;
+        }
+    }
+}
+
+if (! function_exists('schema_has_demo_column')) {
+    function schema_has_demo_column(string $table): bool
+    {
+        static $cache = [];
+
+        if (! array_key_exists($table, $cache)) {
+            try {
+                $cache[$table] = \Illuminate\Support\Facades\Schema::hasColumn($table, 'is_demo');
+            } catch (\Throwable $e) {
+                $cache[$table] = false;
+            }
+        }
+
+        return $cache[$table];
+    }
+}
+
+if (! function_exists('demo_data_exists')) {
+    function demo_data_exists(): bool
+    {
+        try {
+            return \App\Models\Supplier::withoutGlobalScopes()
+                ->where('is_demo', true)
+                ->exists();
+        } catch (\Throwable $e) {
+            return false;
+        }
+    }
+}

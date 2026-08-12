@@ -9,14 +9,15 @@ use App\Models\Invoice;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\BuyProduct;
+use App\Models\Concerns\HidesDemoData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory , SoftDeletes;
-    protected $fillable = ['name', 'unit_price', 'supplier_id', 'unit_id', 'category_id'];
+    use HasFactory, SoftDeletes, HidesDemoData;
+    protected $fillable = ['name', 'unit_price', 'supplier_id', 'unit_id', 'category_id', 'is_demo'];
 
     public function unit(){
         return $this->belongsTo(unit::class);

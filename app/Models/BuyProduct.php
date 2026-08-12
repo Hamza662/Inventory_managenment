@@ -6,13 +6,14 @@ use App\Models\Buy;
 use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Concerns\HidesDemoData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BuyProduct extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory, SoftDeletes, HidesDemoData;
 
     protected $table = 'buy_product';
 
@@ -23,6 +24,7 @@ class BuyProduct extends Model
         'unit_price',
         'total_price',
         'description',
+        'is_demo',
     ];
 
     public function buy()

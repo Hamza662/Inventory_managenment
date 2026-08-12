@@ -15,6 +15,38 @@
             </div>
         </div>
 
+        <div class="demo-toolkit mb-4">
+            <div class="demo-toolkit-copy">
+                <div class="demo-toolkit-kicker">Sandbox</div>
+                <h5>Demo data toolkit</h5>
+                <p>
+                    @if ($demoExists && $demoVisible)
+                        Demo records are loaded and visible across suppliers, products, purchases and invoices.
+                    @elseif ($demoExists && ! $demoVisible)
+                        Demo records are still in the database, but hidden from the UI.
+                    @else
+                        Import sample inventory data to explore the full portal quickly.
+                    @endif
+                </p>
+            </div>
+            <div class="demo-toolkit-actions">
+                <form action="{{ route('demo.import') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn demo-btn-import">
+                        <i class="bx bx-download"></i>
+                        {{ $demoExists && ! $demoVisible ? 'Show demo data' : 'Import demo data' }}
+                    </button>
+                </form>
+                <form action="{{ route('demo.clear') }}" method="POST" onsubmit="return confirm('Hide demo data from UI only? Nothing will be deleted from the database.');">
+                    @csrf
+                    <button type="submit" class="btn demo-btn-clear" @disabled(! $demoExists || ! $demoVisible)>
+                        <i class="bx bx-hide"></i>
+                        Clear demo data
+                    </button>
+                </form>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-6 col-lg-3 mb-4">
                 <div class="card stat-card">
