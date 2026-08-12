@@ -1,4 +1,4 @@
-@extends('admin.admin_dashboard')
+﻿@extends('admin.admin_dashboard')
 
 @section('content')
     <div class="container">
@@ -72,11 +72,11 @@
                                             <td>{{ optional($item->product)->name }}</td>
                                             <td>{{ $remainingStock }}</td>
                                             <td>{{ $item->quantity }}</td>
-                                            <td>${{ number_format($item->price) }}</td>
-                                            <td>${{ number_format($item->total_price) }}</td>
+                                            <td>{{ currency_symbol() }}{{ number_format($item->price) }}</td>
+                                            <td>{{ currency_symbol() }}{{ number_format($item->total_price) }}</td>
                                             <td>{{ number_format($item->discount) }}%</td>
-                                            <td>${{ number_format($item->invoice->partial_amount) }}</td>
-                                            <td>${{ number_format($dueAmount) }}</td>
+                                            <td>{{ currency_symbol() }}{{ number_format($item->invoice->partial_amount) }}</td>
+                                            <td>{{ currency_symbol() }}{{ number_format($dueAmount) }}</td>
                                         </tr>
                                     @empty
                                         <tr>

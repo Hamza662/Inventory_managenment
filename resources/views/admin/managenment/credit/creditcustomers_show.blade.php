@@ -1,4 +1,4 @@
-@extends('admin.admin_dashboard')
+﻿@extends('admin.admin_dashboard')
 
 @section('content')
     <div class="container">
@@ -69,11 +69,11 @@
                                             <td>{{ optional($item->product)->name }}</td>
                                             <td>{{ $remainingStock }}</td>
                                             <td>{{ $item->quantity }}</td>
-                                            <td>${{ number_format($item->price) }}</td>
-                                            <td>${{ number_format($item->total_price) }}</td>
+                                            <td>{{ currency_symbol() }}{{ number_format($item->price) }}</td>
+                                            <td>{{ currency_symbol() }}{{ number_format($item->total_price) }}</td>
                                             <td>{{ number_format($item->discount) }}%</td>
-                                            <td>${{ number_format($invoice->partial_amount) }}</td>
-                                            <td>${{ number_format($dueAmount ,0)}}</td>
+                                            <td>{{ currency_symbol() }}{{ number_format($invoice->partial_amount) }}</td>
+                                            <td>{{ currency_symbol() }}{{ number_format($dueAmount ,0)}}</td>
                                         </tr>
                                     @empty
                                         <tr>
@@ -101,7 +101,7 @@
                                     @forelse ($payments as $payment)
                                         <tr>
                                             <td>{{ $payment->payment_date->format('d-m-Y') }}</td>
-                                            <td>${{ number_format($payment->amount) }}</td>
+                                            <td>{{ currency_symbol() }}{{ number_format($payment->amount) }}</td>
                                         </tr>
                                     @empty
                                         <tr>
@@ -113,7 +113,7 @@
                                 <tfoot>
                                     <tr>
                                         <td><strong>Total Paid:</strong></td>
-                                        <td>${{ number_format($payments->sum('amount')) }}</td>
+                                        <td>{{ currency_symbol() }}{{ number_format($payments->sum('amount')) }}</td>
                                     </tr>
                                 </tfoot>
                             </table>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -115,7 +115,7 @@
         <tfoot>
             <tr>
                 <td colspan="5" class="total">Grand Total:</td>
-                <td class="total">${{ number_format($grandTotal, 0) }}</td>
+                <td class="total">{{ currency_symbol() }}{{ number_format($grandTotal, 0) }}</td>
             </tr>
         </tfoot>
     </table>

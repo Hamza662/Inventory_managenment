@@ -629,3 +629,125 @@ html.premium-ui,
     color: var(--xf-muted);
     margin-bottom: 18px;
 }
+
+.premium-ui .settings-card {
+    animation: xfFadeUp 0.45s ease both;
+}
+
+.premium-ui .settings-section {
+    background: #f8f9fc;
+    border: 1px solid var(--xf-line);
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.premium-ui .settings-section-title {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+}
+
+.premium-ui .settings-preview {
+    width: 100%;
+    min-height: 140px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px dashed #c7d0e4;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.premium-ui .settings-preview img {
+    max-width: 100%;
+    max-height: 140px;
+    object-fit: contain;
+}
+
+.premium-ui .settings-preview.favicon {
+    width: 96px;
+    min-height: 96px;
+    margin: 0 auto;
+}
+
+.premium-ui .settings-preview.favicon img {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.premium-ui .permission-tree {
+    display: grid;
+    gap: 12px;
+}
+
+.premium-ui .perm-group {
+    border: 1px solid #e4e9f6;
+    border-radius: 14px;
+    background: #f8faff;
+    overflow: hidden;
+}
+
+.premium-ui .perm-group-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background: #fff;
+    border-bottom: 1px solid #eef2fb;
+}
+
+.premium-ui .perm-group-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.premium-ui .perm-group-title {
+    font-weight: 650;
+    color: #24324d;
+}
+
+.premium-ui .perm-group-count {
+    font-size: 12px;
+    color: #7b879c;
+    background: #eef2fb;
+    border-radius: 999px;
+    padding: 2px 8px;
+}
+
+.premium-ui .perm-children {
+    display: grid;
+    gap: 8px;
+    padding: 12px 14px 14px;
+}
+
+.premium-ui .perm-leaf {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #e8edf8;
+    cursor: pointer;
+}
+
+.premium-ui .perm-leaf:hover {
+    border-color: #c9d6f5;
+}
+
+.premium-ui .perm-leaf .form-check-input {
+    margin-top: 3px;
+}
+
+.premium-ui .btn-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in · Inventory</title>
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <link rel="alternate icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <title>Sign in · {{ $portalSettings->store_name ?? 'Inventory' }}</title>
+    <link rel="icon" href="{{ $portalSettings->faviconUrl() ?? asset('favicon.svg') }}">
+    <link rel="shortcut icon" href="{{ $portalSettings->faviconUrl() ?? asset('favicon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -458,16 +458,20 @@
         <section class="brand-side">
             <a href="{{ url('/') }}" class="logo">
                 <span class="logo-mark">
+                    @if (!empty($portalSettings?->logo))
+                        <img src="{{ $portalSettings->logoUrl() }}" alt="{{ $portalSettings->store_name }}" style="width:100%;height:100%;object-fit:cover;border-radius:14px;">
+                    @else
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                         <path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5v-9z" stroke="white" stroke-width="1.8"/>
                         <path d="M12 12l9-4.5M12 12v9M12 12L3 7.5" stroke="white" stroke-width="1.8"/>
                     </svg>
+                    @endif
                 </span>
-                Inventory
+                {{ $portalSettings->store_name ?? 'Inventory' }}
             </a>
 
             <div class="hero">
-                <div class="eyebrow">Smart stock control</div>
+                <div class="eyebrow">{{ $portalSettings->store_tagline ?? 'Smart stock control' }}</div>
                 <h1>Welcome back to <span>your warehouse.</span></h1>
                 <p>Sign in with your email or username and keep products, purchases, and invoices moving in one place.</p>
                 <div class="stats">

@@ -2,12 +2,16 @@
     <div class="app-brand demo">
         <a href="{{ route('admin.index') }}" class="app-brand-link">
             <span class="brand-mark me-2">
+                @if (!empty($portalSettings?->logo))
+                    <img src="{{ $portalSettings->logoUrl() }}" alt="{{ $portalSettings->store_name }}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+                @else
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                     <path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5v-9z" stroke="white" stroke-width="1.8"/>
                     <path d="M12 12l9-4.5M12 12v9M12 12L3 7.5" stroke="white" stroke-width="1.8"/>
                 </svg>
+                @endif
             </span>
-            <span class="app-brand-text demo menu-text fw-bolder">Inventory</span>
+            <span class="app-brand-text demo menu-text fw-bolder">{{ $portalSettings->store_name ?? 'Inventory' }}</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -86,6 +90,29 @@
             <a href="{{ route('stocks.report') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div>Stock</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">System</span></li>
+
+        <li class="menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
+            <a href="{{ route('users.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div>Users</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ request()->routeIs('roles.*') ? 'active' : '' }}">
+            <a href="{{ route('roles.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-shield-quarter"></i>
+                <div>Roles</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ request()->routeIs('settings.*') ? 'active' : '' }}">
+            <a href="{{ route('settings.edit') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div>Settings</div>
             </a>
         </li>
     </ul>

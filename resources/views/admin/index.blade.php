@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="d-flex flex-column">
                                         <small>2022</small>
-                                        <h6 class="mb-0">$32.5k</h6>
+                                        <h6 class="mb-0">{{ currency_symbol() }}32.5k</h6>
                                     </div>
                                 </div>
                                 <div class="d-flex">
@@ -156,7 +156,7 @@
                                     </div>
                                     <div class="d-flex flex-column">
                                         <small>2021</small>
-                                        <h6 class="mb-0">$41.2k</h6>
+                                        <h6 class="mb-0">{{ currency_symbol() }}41.2k</h6>
                                     </div>
                                 </div>
                             </div>
@@ -231,7 +231,7 @@
                                         <div class="mt-sm-auto">
                                             <small class="text-success text-nowrap fw-semibold"><i
                                                     class="bx bx-chevron-up"></i> 68.2%</small>
-                                            <h3 class="mb-0">$84,686k</h3>
+                                            <h3 class="mb-0">{{ currency_symbol() }}84,686k</h3>
                                         </div>
                                     </div>
                                     <div class="chart-shell" style="--chart-h: 80px">
@@ -374,7 +374,7 @@
                                     <div>
                                         <small class="text-muted d-block">Total Balance</small>
                                         <div class="d-flex align-items-center">
-                                            <h6 class="mb-0 me-1">$459.10</h6>
+                                            <h6 class="mb-0 me-1">{{ currency_symbol() }}459.10</h6>
                                             <small class="text-success fw-semibold">
                                                 <i class="bx bx-chevron-up"></i>
                                                 42.9%
@@ -395,7 +395,7 @@
                                     </div>
                                     <div>
                                         <p class="mb-n1 mt-1">Expenses This Week</p>
-                                        <small class="text-muted">$39 less than last week</small>
+                                        <small class="text-muted">{{ currency_symbol() }}39 less than last week</small>
                                     </div>
                                 </div>
                             </div>

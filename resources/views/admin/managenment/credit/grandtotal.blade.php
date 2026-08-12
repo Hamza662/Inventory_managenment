@@ -1,4 +1,4 @@
-@extends('admin.admin_dashboard')
+﻿@extends('admin.admin_dashboard')
 
 @section('content')
 <div class="container mt-5">
@@ -20,12 +20,12 @@
                     <td>{{ $creditcustomer->invoice }}</td>
                     <td>{{ $creditcustomer->date }}</td>
                     <td>{{ $creditcustomer->customer->name }}</td>
-                    <td>${{ $creditcustomer->due_amount }}</td>
+                    <td>{{ currency_symbol() }}{{ $creditcustomer->due_amount }}</td>
                 </tr>
             @endforeach
             <tr>
                 <td colspan="4"><strong>Grand Due Amount</strong></td>
-                <td><strong>${{ $GrandTotal }}</strong></td>
+                <td><strong>{{ currency_symbol() }}{{ $GrandTotal }}</strong></td>
             </tr>
         </tbody>
     </table>

@@ -15,6 +15,9 @@ use App\Http\Controllers\managenment\CategoryController;
 use App\Http\Controllers\managenment\CustomerController;
 use App\Http\Controllers\managenment\PurchaseController;
 use App\Http\Controllers\managenment\CreditCustomerController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +45,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/change/password', [AdminController::class, 'AdminChangepassword'])->name('admin.change.password');
     Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
+
+    Route::get('/admin/settings', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::put('/admin/settings', [SettingController::class, 'update'])->name('settings.update');
+
+    // Roles & Users (access control)
+    Route::get('/admin/roles/trash', [RoleController::class, 'trash'])->name('roles.trash');
+    Route::get('/admin/roles/restore/{id}', [RoleController::class, 'restore'])->name('roles.restore');
+    Route::delete('/admin/roles/trash/{id}/force-delete', [RoleController::class, 'forceDelete'])->name('roles.forcedelete');
+    Route::resource('/admin/roles', RoleController::class)->names('roles')->except(['show']);
+
+    Route::get('/admin/users/trash', [UserManagementController::class, 'trash'])->name('users.trash');
+    Route::get('/admin/users/restore/{id}', [UserManagementController::class, 'restore'])->name('users.restore');
+    Route::delete('/admin/users/trash/{id}/force-delete', [UserManagementController::class, 'forceDelete'])->name('users.forcedelete');
+    Route::get('/admin/users/{user}/permissions', [UserManagementController::class, 'permissions'])->name('users.permissions');
+    Route::put('/admin/users/{user}/permissions', [UserManagementController::class, 'syncPermissions'])->name('users.permissions.sync');
+    Route::resource('/admin/users', UserManagementController::class)->names('users')->except(['show']);
 
     //Global search method route
 

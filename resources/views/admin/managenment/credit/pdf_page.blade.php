@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -75,12 +75,12 @@
                         <td>{{ $creditcustomer->invoice }}</td>
                         <td>{{ $creditcustomer->date }}</td>
                         <td>{{ $creditcustomer->customer->name }}</td>
-                        <td>${{ $creditcustomer->due_amount }}</td>
+                        <td>{{ currency_symbol() }}{{ $creditcustomer->due_amount }}</td>
                     </tr>
                 @endforeach
                 <tr class="total-row">
                     <td colspan="4">Grand Due Amount</td>
-                    <td>${{ $grandtotal }}</td>
+                    <td>{{ currency_symbol() }}{{ $grandtotal }}</td>
                 </tr>
             </tbody>
         </table>

@@ -29,13 +29,13 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Inventory · Admin Portal</title>
+    <title>{{ $portalSettings->store_name ?? 'Inventory' }} · Admin Portal</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content="{{ $portalSettings->store_tagline ?? '' }}" />
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}" />
-    <link rel="alternate icon" type="image/png" href="{{ asset('favicon.png') }}" />
+    <link rel="icon" href="{{ $portalSettings->faviconUrl() ?? asset('favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ $portalSettings->faviconUrl() ?? asset('favicon.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -205,8 +205,13 @@
         @if (session()->has('success'))
             toastr.success('{{ session('success') }}');
         @endif
+
+        @if (session()->has('message'))
+            toastr.{{ session('alert-type', 'success') }}('{{ session('message') }}');
+        @endif
     });
 </script>
+@stack('scripts')
 <script>
     function confirmDelete(supplierId) {
         Swal.fire({

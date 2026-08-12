@@ -1,4 +1,4 @@
-@extends('admin.admin_dashboard')
+﻿@extends('admin.admin_dashboard')
 
 @section('content')
     <style>
@@ -64,7 +64,7 @@
                     <tfoot>
                         <tr>
                             <th colspan="5" style="text-align: right;">Grand Total:</th>
-                            <th>${{ $grandTotal }}</th>
+                            <th>{{ currency_symbol() }}{{ $grandTotal }}</th>
                         </tr>
                     </tfoot>
                 </table>

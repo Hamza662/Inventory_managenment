@@ -75,6 +75,24 @@
                 ['label' => 'Supplier / product', 'route' => 'reports.supplier_product', 'icon' => 'bx-git-compare'],
             ],
         ],
+        [
+            'match' => ['roles.*'],
+            'title' => 'Roles',
+            'tabs' => [
+                ['label' => 'All', 'route' => 'roles.index', 'icon' => 'bx-list-ul'],
+                ['label' => 'Create', 'route' => 'roles.create', 'icon' => 'bx-plus'],
+                ['label' => 'Trash', 'route' => 'roles.trash', 'icon' => 'bx-trash'],
+            ],
+        ],
+        [
+            'match' => ['users.*'],
+            'title' => 'Users',
+            'tabs' => [
+                ['label' => 'All', 'route' => 'users.index', 'icon' => 'bx-list-ul'],
+                ['label' => 'Create', 'route' => 'users.create', 'icon' => 'bx-plus'],
+                ['label' => 'Trash', 'route' => 'users.trash', 'icon' => 'bx-trash'],
+            ],
+        ],
     ];
 
     $current = collect($modules)->first(function ($module) {
